@@ -1,0 +1,46 @@
+plugins {
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+group 'anliksim'
+version '1.0.0'
+
+gradlePlugin {
+    plugins {
+        hello {
+            id = "${group}.hello"
+            implementationClass = "${group}.hello.HelloPlugin"
+        }
+        goodbye {
+            id = "${group}.goodbye"
+            implementationClass = "${group}.goodbye.GoodbyePlugin"
+        }
+        greets {
+            id = "${group}.greets"
+            implementationClass = "${group}.greets.GreetingPlugin"
+        }
+    }
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    testImplementation gradleTestKit()
+    testImplementation 'junit:junit:4.12'
+    testImplementation('org.spockframework:spock-core:1.3-groovy-2.4') {
+        exclude module: 'groovy-all'
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+publishing {
+    repositories {
+        mavenLocal()
+    }
+}
